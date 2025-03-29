@@ -38,8 +38,19 @@ const deleteProducto = async (req, res) => {
   }
 };
 
+const getProductos = async (req, res) => {
+  try {
+    const productos = await Producto.findAll();
+    res.status(200).json(productos);
+  } catch (err) {
+    logger.error('Error fetching productos:', { error: err.message });
+    res.status(500).json({ error: 'Error fetching productos', details: err.message });
+  }
+};
+
 module.exports = {
   createProducto,
   updateProducto,
   deleteProducto,
+  getProductos
 };

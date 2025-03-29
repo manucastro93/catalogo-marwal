@@ -5,6 +5,7 @@ const auth = require('../middleware/auth');
 
 // Rutas de usuarios
 router.post('/create', auth('Administrador'), usuarioController.createUsuario);
+router.get('/all', usuarioController.getUsuarios);
 // router.get('/generate-link', auth('Vendedor'), usuarioController.generateVendedorLink);
 
 module.exports = router;

@@ -39,7 +39,18 @@ const generateVendedorLink = async (req, res) => {
   }
 };
 
+const getVendedores = async (req, res) => {
+  try {
+    const vendedores = await Vendedor.findAll();
+    res.status(200).json(vendedores);
+  } catch (err) {
+    logger.error('Error fetching sellers:', { error: err.message });
+    res.status(500).json({ error: 'Error fetching sellers', details: err.message });
+  }
+};
+
 module.exports = {
   createVendedor,
   generateVendedorLink,
+  getVendedores
 };

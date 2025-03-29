@@ -25,6 +25,17 @@ const getPedidosByVendedor = async (req, res) => {
   }
 };
 
+const getPedidosById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const pedidos = await Pedido.findById(id);
+    res.status(200).json(pedidos);
+  } catch (err) {
+    logger.error('Error fetching pedidos:', { error: err.message });
+    res.status(500).json({ error: 'Error fetching pedidos', details: err.message });
+  }
+};
+
 const updatePedido = async (req, res) => {
   const { id } = req.params;
   const { productos } = req.body;
@@ -50,9 +61,21 @@ const deletePedido = async (req, res) => {
   }
 };
 
+const getPedidos = async (req, res) => {
+  try {
+    const pedidos = await Pedido.findAll();
+    res.status(200).json(pedidos);
+  } catch (err) {
+    logger.error('Error fetching pedidos:', { error: err.message });
+    res.status(500).json({ error: 'Error fetching pedidos', details: err.message });
+  }
+};
+
 module.exports = {
   createPedido,
   getPedidosByVendedor,
   updatePedido,
   deletePedido,
+  getPedidos,
+  getPedidosById
 };

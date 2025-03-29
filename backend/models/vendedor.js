@@ -51,7 +51,15 @@ const Vendedor = {
       throw err;
     }
   },
-
+  findAll: async () => {
+    try {
+      const [result] = await pool.query('SELECT * FROM usuarios WHERE rol = "vendedor"');
+      return result;
+    } catch (err) {
+      console.error('Error fetching vendedores:', err);
+      throw err;
+    }
+  },
   findByCode: async (code) => {
     try {
       const [result] = await pool.query('SELECT * FROM usuarios WHERE code = ? LIMIT 1', [code]);

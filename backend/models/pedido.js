@@ -44,6 +44,16 @@ const Pedido = {
     }
   },
 
+  findAll: async () => {
+      try {
+        const [result] = await pool.query('SELECT * FROM pedidos');
+        return result;
+      } catch (err) {
+        console.error('Error fetching pedidos:', err);
+        throw err;
+      }
+    },
+    
   findByVendedorId: async (vendedorId) => {
     try {
       const [rows] = await pool.query(`
@@ -53,6 +63,16 @@ const Pedido = {
       return rows;
     } catch (err) {
       console.error('Error finding pedidos by vendedorId:', err);
+      throw err;
+    }
+  },
+
+  findById: async (id) => {
+    try {
+      const [rows] = await pool.query('SELECT * FROM pedidos WHERE pedido_id = ?', [id]);
+      return rows;
+    } catch (err) {
+      console.error('Error finding pedidos by Id:', err);
       throw err;
     }
   },

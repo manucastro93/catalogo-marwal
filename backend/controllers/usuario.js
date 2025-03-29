@@ -68,6 +68,16 @@ const getUsuario = async (req, res) => {
   }
 };
 
+const getUsuarios = async (req, res) => {
+  try {
+    const usuarios = await Usuario.findAll();
+    res.status(200).json(usuarios);
+  } catch (err) {
+    logger.error('Error fetching usuarios:', { error: err.message });
+    res.status(500).json({ error: 'Error fetching usuarios', details: err.message });
+  }
+};
+
 const updateUsuario = async (req, res) => {
   const { nombre, email, rol } = req.body;
 
@@ -112,4 +122,5 @@ module.exports = {
   getUsuario,
   updateUsuario,
   deleteUsuario,
+  getUsuarios
 };

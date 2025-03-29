@@ -5,6 +5,7 @@ const auth = require('../middleware/auth');
 
 // Rutas de productos
 router.post('/create', auth('Administrador'), productoController.createProducto);
+router.get('/all', productoController.getProductos);
 // Otras rutas relacionadas con productos
 
 module.exports = router;

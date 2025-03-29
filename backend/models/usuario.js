@@ -53,7 +53,15 @@ const Usuario = {
       throw err;
     }
   },
-
+  findAll: async () => {
+    try {
+      const [result] = await pool.query('SELECT * FROM usuarios');
+      return result;
+    } catch (err) {
+      console.error('Error fetching usuarios:', err);
+      throw err;
+    }
+  },
   findByEmail: async (email) => {
     try {
       const [rows] = await pool.query('SELECT * FROM usuarios WHERE email = ?', [email]);

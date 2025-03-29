@@ -44,6 +44,16 @@ const Producto = {
     }
   },
 
+  findAll: async () => {
+      try {
+        const [result] = await pool.query('SELECT * FROM productos');
+        return result;
+      } catch (err) {
+        console.error('Error fetching productos:', err);
+        throw err;
+      }
+    },
+    
   delete: async (id) => {
     try {
       await pool.query('DELETE FROM productos WHERE id = ?', [id]);
